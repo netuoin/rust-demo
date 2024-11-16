@@ -8,6 +8,7 @@ fn main() {
         .output()
         .expect("Failed to start v2ray");
 
-    // 输出流量数据
-    println!("{:?}", output);
+    // 输出流量数据,转换为json
+    let output = String::from_utf8_lossy(&output.stdout);
+    println!("{}", output);
 }
