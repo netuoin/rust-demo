@@ -11,4 +11,7 @@ fn main() {
     // 打印第一行
     let output = output.lines().next().unwrap();
     println!("{}", output);
+    // 打印第二行
+    let output = output.lines().nth(1).unwrap();
+    println!("{}", output);
 }
