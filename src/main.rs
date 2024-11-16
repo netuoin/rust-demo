@@ -7,5 +7,8 @@ fn main() {
         .arg("stats")
         .output()
         .expect("Failed to start v2ray");
-    print!("{}", String::from_utf8_lossy(&output.stdout));
+    let output =  String::from_utf8_lossy(&output.stdout);
+    // 打印第一行
+    let output = output.lines().next().unwrap();
+    println!("{}", output);
 }
