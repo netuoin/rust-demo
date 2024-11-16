@@ -8,7 +8,6 @@ fn main() {
         .output()
         .expect("Failed to start v2ray");
 
-    // 解析v2ray的api返回的数据
-    let output_str = String::from_utf8(output.stdout).unwrap();
-    println!("{}", output_str);
+    // 输出流量数据
+    println!("{:?}", output);
 }
