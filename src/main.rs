@@ -7,40 +7,18 @@ fn main() {
         .arg("stats")
         .output()
         .expect("Failed to start v2ray");
-
-    // 控制台输入
-    // Value       Name
-    // 59.30KB     a1
-    // 32.92KB     a2
-    // 2.95MB      a3
-    // 2.39MB      a4
-    // 2.44MB      a5
-    // 2.26MB      a6
-    // 2.44MB      a7
-    // 2.26MB      a8
-
-    // 转换为json
-    // {
-    //     "a1": "59.30KB",
-    //     "a2": "32.92KB",
-    //     "a3": "2.95MB",
-    //     "a4": "2.39MB",
-    //     "a5": "2.44MB",
-    //     "a6": "2.26MB",
-    //     "a7": "2.44MB",
-    //     "a8": "2.26MB"
-    // }
-    let output = String::from_utf8_lossy(&output.stdout);
-    let output = output.split("\n").collect::<Vec<&str>>();
-    let mut json = "{".to_string();
-    for i in 1..output.len() {
-        let line = output[i].split_whitespace().collect::<Vec<&str>>();
-        if line.len() == 2 {
-            json.push_str(&format!("\"{}\": \"{}\",\n", line[1], line[0]));
+    // 接收命令行参数
+    let args: Vec<String> = std::env::args().collect();
+    // 赋值给变量
+    let mut traffic: f64 = 0.0;
+    // 判断是否有参数
+    if args.len() > 1 {
+        // 判断参数是否为数字
+        if let Ok(num) = args[1].parse::<f64>() {
+            // 赋值给变量
+            traffic = num;
         }
     }
-    json.pop();
-    json.pop();
-    json.push('}');
-    println!("{}", json);
+    // 打印
+    println!("traffic: {}", traffic);
 }
